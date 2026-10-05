@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Trivia | Reto Verde</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="contenedor">
+        <section id="pantalla-inicio" class="pantalla activa">
+            <div class="icono-planeta">🌱</div>
+            <p class="etiqueta">RETO VERDE</p>
+            <h1>Eco<span>-Trivia</span></h1>
+            <p class="subtitulo">Pon a prueba tus hábitos y conviértete en una persona aliada del planeta.</p>
+            <div class="datos-juego">
+                <div><strong>10</strong><small>preguntas</small></div>
+                <div><strong>3</strong><small>categorías</small></div>
+                <div><strong>100%</strong><small>diversión</small></div>
+            </div>
+            <button id="boton-iniciar" class="boton boton-principal">Comenzar desafío <span>→</span></button>
+            <p class="nota">Reciclaje · Energía · Huella de carbono</p>
+        </section>
+
+        <section id="pantalla-juego" class="pantalla">
+            <header class="cabecera-juego">
+                <div>
+                    <p class="etiqueta" id="categoria">CATEGORÍA</p>
+                    <p class="contador">Pregunta <strong id="numero-pregunta">1</strong> de 10</p>
+                </div>
+                <div class="marcador"><span>★</span> <strong id="puntuacion">0</strong> pts</div>
+            </header>
+            <div class="barra-fondo"><div id="barra-progreso" class="barra-progreso"></div></div>
+            <div class="racha" id="racha">Racha actual: 0</div>
+            <h2 id="texto-pregunta">Pregunta</h2>
+            <div id="opciones" class="opciones"></div>
+            <p id="mensaje-respuesta" class="mensaje-respuesta"></p>
+            <button id="boton-siguiente" class="boton boton-siguiente" disabled>Siguiente pregunta <span>→</span></button>
+        </section>
+
+        <section id="pantalla-final" class="pantalla">
+            <div class="icono-final">🏆</div>
+            <p class="etiqueta">DESAFÍO COMPLETADO</p>
+            <h2>¡Gran trabajo, guardián verde!</h2>
+            <p class="resultado-texto">Tu puntuación final es:</p>
+            <div class="puntuacion-final"><strong id="puntuacion-final">0</strong><span>puntos</span></div>
+            <p id="mensaje-final" class="mensaje-final"></p>
+            <button id="boton-reiniciar" class="boton boton-principal">Jugar de nuevo <span>↻</span></button>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
