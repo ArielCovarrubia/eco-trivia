@@ -27,7 +27,9 @@ function cargarPregunta() {
     $('#puntuacion').textContent = puntuacion;
     $('#racha').textContent = `Racha actual: ${racha}`;
     $('#texto-pregunta').textContent = pregunta.texto;
-    $('#barra-progreso').style.width = `${((preguntaActual + 1) / preguntas.length) * 100}%`;
+    const porcentaje = Math.round(((preguntaActual + 1) / preguntas.length) * 100);
+    $('#barra-progreso').style.width = `${porcentaje}%`;
+    $('#porcentaje-progreso').textContent = `${porcentaje}%`;
     $('#mensaje-respuesta').textContent = '';
     $('#boton-siguiente').disabled = true;
     $('#opciones').innerHTML = '';
@@ -35,7 +37,12 @@ function cargarPregunta() {
     pregunta.opciones.forEach((opcion, indice) => {
         const boton = document.createElement('button');
         boton.className = 'opcion';
-        boton.textContent = `${String.fromCharCode(65 + indice)}. ${opcion}`;
+        const letra = document.createElement('span');
+        letra.className = 'letra-opcion';
+        letra.textContent = String.fromCharCode(65 + indice);
+        const texto = document.createElement('span');
+        texto.textContent = opcion;
+        boton.append(letra, texto);
         boton.addEventListener('click', () => comprobarRespuesta(indice, boton));
         $('#opciones').appendChild(boton);
     });

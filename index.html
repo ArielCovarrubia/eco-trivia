@@ -9,14 +9,15 @@
 <body>
     <main class="contenedor">
         <section id="pantalla-inicio" class="pantalla activa">
+            <div class="marca"><span class="marca-hoja">✦</span> ECO CLUB <span class="marca-linea"></span></div>
             <div class="icono-planeta">🌱</div>
             <p class="etiqueta">RETO VERDE</p>
             <h1>Eco<span>-Trivia</span></h1>
             <p class="subtitulo">Pon a prueba tus hábitos y conviértete en una persona aliada del planeta.</p>
             <div class="datos-juego">
                 <div><strong>10</strong><small>preguntas</small></div>
-                <div><strong>3</strong><small>categorías</small></div>
-                <div><strong>100%</strong><small>diversión</small></div>
+                <div><strong>5</strong><small>temas</small></div>
+                <div><strong>∞</strong><small>aprendizaje</small></div>
             </div>
             <button id="boton-iniciar" class="boton boton-principal">Comenzar desafío <span>→</span></button>
             <p class="nota">Reciclaje · Energía · Huella de carbono</p>
@@ -25,14 +26,22 @@
         <section id="pantalla-juego" class="pantalla">
             <header class="cabecera-juego">
                 <div>
+                    <p class="quiz-marca"><span class="punto-vivo"></span> QUIZ EN JUEGO</p>
                     <p class="etiqueta" id="categoria">CATEGORÍA</p>
                     <p class="contador">Pregunta <strong id="numero-pregunta">1</strong> de 10</p>
                 </div>
                 <div class="marcador"><span>★</span> <strong id="puntuacion">0</strong> pts</div>
             </header>
+            <div class="progreso-linea"><span>PROGRESO</span><strong id="porcentaje-progreso">10%</strong></div>
             <div class="barra-fondo"><div id="barra-progreso" class="barra-progreso"></div></div>
-            <div class="racha" id="racha">Racha actual: 0</div>
-            <h2 id="texto-pregunta">Pregunta</h2>
+            <div class="pregunta-card">
+                <div class="numero-card">?</div>
+                <div>
+                    <div class="racha" id="racha"><span>🔥</span> Racha actual: 0</div>
+                    <h2 id="texto-pregunta">Pregunta</h2>
+                </div>
+            </div>
+            <p class="elige-texto">Elige una respuesta</p>
             <div id="opciones" class="opciones"></div>
             <p id="mensaje-respuesta" class="mensaje-respuesta"></p>
             <button id="boton-siguiente" class="boton boton-siguiente" disabled>Siguiente pregunta <span>→</span></button>

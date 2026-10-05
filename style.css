@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap');
 
+:root {
+    --ink: #092b24;
+    --panel: #123c32;
+    --panel-light: #19473a;
+    --lime: #caec5e;
+    --paper: #f5f2df;
+    --muted: #a7c0b1;
+    --line: rgba(245, 242, 223, 0.14);
+}
+
 * {
     box-sizing: border-box;
 }
@@ -12,8 +22,8 @@ body {
     align-items: center;
     padding: 24px;
     font-family: 'DM Sans', sans-serif;
-    background: #092b24;
-    color: #f5f2df;
+    background: var(--ink);
+    color: var(--paper);
     overflow-x: hidden;
 }
 
@@ -22,11 +32,22 @@ body::before {
     position: fixed;
     width: 420px;
     height: 420px;
-    border: 1px solid rgba(202, 236, 94, 0.25);
+    border: 1px solid rgba(202, 236, 94, 0.2);
     border-radius: 50%;
     top: -180px;
     right: -120px;
     box-shadow: 0 0 0 55px rgba(202, 236, 94, 0.04), 0 0 0 110px rgba(202, 236, 94, 0.03);
+    pointer-events: none;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    opacity: 0.16;
+    background-image: linear-gradient(rgba(245, 242, 223, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 242, 223, 0.07) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(to bottom, black, transparent 70%);
     pointer-events: none;
 }
 
@@ -35,12 +56,21 @@ body::before {
     max-width: 700px;
     padding: 52px;
     text-align: center;
-    background: #123c32;
-    border: 1px solid rgba(245, 242, 223, 0.14);
+    background: linear-gradient(145deg, rgba(25, 71, 58, 0.98), rgba(12, 49, 40, 0.98));
+    border: 1px solid var(--line);
     border-radius: 28px;
     box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
     position: relative;
     overflow: hidden;
+}
+
+.contenedor::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-top: 2px solid rgba(202, 236, 94, 0.7);
+    border-radius: 28px;
+    pointer-events: none;
 }
 
 .pantalla { display: none; animation: aparecer 0.45s ease both; }
@@ -51,15 +81,19 @@ body::before {
     to { opacity: 1; transform: translateY(0); }
 }
 
-.icono-planeta, .icono-final { font-size: 4rem; margin-bottom: 12px; }
+.marca { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 26px; color: #dce8d8; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; }
+.marca-hoja { display: inline-grid; place-items: center; width: 24px; height: 24px; border: 1px solid var(--lime); border-radius: 50%; color: var(--lime); }
+.marca-linea { display: block; width: 34px; height: 1px; background: rgba(245, 242, 223, 0.3); }
+.icono-planeta, .icono-final { font-size: 4.2rem; margin-bottom: 12px; filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.18)); animation: flotar 3s ease-in-out infinite; }
+@keyframes flotar { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-7px) rotate(3deg); } }
 .etiqueta { color: #caec5e; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.18em; margin: 0 0 14px; }
 h1, h2 { font-family: 'Space Grotesk', sans-serif; }
 h1 { font-size: clamp(3.2rem, 10vw, 5.5rem); line-height: 0.9; margin: 0 0 22px; letter-spacing: -0.08em; }
 h1 span { color: #caec5e; }
 h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.15; margin: 12px 0 24px; }
 .subtitulo { max-width: 450px; margin: auto; color: #b4c9bd; line-height: 1.6; }
-.datos-juego { display: flex; justify-content: center; gap: 42px; margin: 30px 0; }
-.datos-juego div { display: grid; gap: 4px; }
+.datos-juego { display: flex; justify-content: center; gap: 10px; margin: 30px 0; }
+.datos-juego div { min-width: 112px; display: grid; gap: 4px; padding: 12px 10px; border: 1px solid rgba(245, 242, 223, 0.1); border-radius: 12px; background: rgba(9, 43, 36, 0.25); }
 .datos-juego strong { color: #caec5e; font: 700 1.5rem 'Space Grotesk', sans-serif; }
 .datos-juego small, .nota { color: #91afa1; font-size: 0.75rem; }
 .nota { margin: 24px 0 0; }
@@ -70,24 +104,33 @@ h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.15; margin: 12px 0 24
     padding: 15px 22px;
     font: 700 1rem 'DM Sans', sans-serif;
     cursor: pointer;
-    transition: transform 0.2s, background 0.2s;
+    transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
 }
-.boton:hover { transform: translateY(-3px); }
+.boton:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18); }
 .boton span { font-size: 1.3rem; margin-left: 12px; }
 .boton-principal { background: #caec5e; color: #17382e; min-width: 230px; }
 .boton-principal:hover { background: #e2f894; }
 
 .cabecera-juego { display: flex; justify-content: space-between; align-items: center; text-align: left; }
+.quiz-marca { display: flex; align-items: center; gap: 7px; color: #dce8d8; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; margin: 0 0 9px; }
+.punto-vivo { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 4px rgba(202, 236, 94, 0.14); }
 .contador { margin: 0; color: #b4c9bd; font-size: 0.9rem; }
-.marcador { background: rgba(202, 236, 94, 0.12); border-radius: 10px; padding: 10px 14px; color: #caec5e; }
+.marcador { border: 1px solid rgba(202, 236, 94, 0.2); background: rgba(202, 236, 94, 0.12); border-radius: 10px; padding: 10px 14px; color: var(--lime); }
 .marcador span { margin-right: 5px; }
-.barra-fondo { height: 7px; margin: 25px 0 20px; background: #285347; border-radius: 10px; overflow: hidden; }
-.barra-progreso { height: 100%; width: 10%; background: #caec5e; border-radius: inherit; transition: width 0.4s ease; }
-.racha { display: inline-block; padding: 6px 12px; border-radius: 20px; background: rgba(245, 242, 223, 0.08); color: #d8e4d7; font-size: 0.8rem; }
-#pantalla-juego h2 { text-align: left; margin-top: 25px; }
+.barra-fondo { height: 9px; margin: 25px 0 20px; background: #285347; border-radius: 10px; overflow: hidden; }
+.barra-progreso { height: 100%; width: 10%; background: var(--lime); border-radius: inherit; transition: width 0.4s ease; box-shadow: 0 0 12px rgba(202, 236, 94, 0.5); }
+.progreso-linea { display: flex; justify-content: space-between; margin-top: 24px; color: #91afa1; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.13em; }
+.progreso-linea strong { color: var(--lime); }
+.pregunta-card { display: grid; grid-template-columns: 52px 1fr; gap: 18px; align-items: start; margin-top: 28px; padding: 22px; border: 1px solid rgba(245, 242, 223, 0.13); border-radius: 18px; background: rgba(9, 43, 36, 0.32); text-align: left; }
+.numero-card { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 14px; background: var(--lime); color: var(--ink); font: 700 1.7rem 'Space Grotesk', sans-serif; }
+.racha { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 20px; background: rgba(245, 242, 223, 0.08); color: #d8e4d7; font-size: 0.8rem; }
+#pantalla-juego h2 { text-align: left; margin: 15px 0 0; }
+.elige-texto { margin: 22px 0 10px; color: #b4c9bd; font-size: 0.85rem; text-align: left; }
 .opciones { display: grid; gap: 12px; text-align: left; }
-.opcion { width: 100%; padding: 16px 18px; border: 1px solid #3b6657; border-radius: 12px; background: #19473a; color: #f5f2df; font: 500 1rem 'DM Sans', sans-serif; text-align: left; cursor: pointer; transition: 0.2s; }
-.opcion:hover:not(:disabled) { border-color: #caec5e; background: #235745; transform: translateX(4px); }
+.opcion { width: 100%; padding: 17px 18px; border: 1px solid #3b6657; border-radius: 12px; background: var(--panel-light); color: var(--paper); font: 500 1rem 'DM Sans', sans-serif; text-align: left; cursor: pointer; transition: 0.2s; }
+.opcion:hover:not(:disabled) { border-color: var(--lime); background: #235745; transform: translateX(5px); box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14); }
+.opcion { display: flex; align-items: center; gap: 14px; }
+.letra-opcion { display: grid; place-items: center; flex: 0 0 32px; width: 32px; height: 32px; border: 1px solid #527b6a; border-radius: 9px; color: #caec5e; font-weight: 700; }
 .opcion.correcta { background: #286b4d; border-color: #caec5e; }
 .opcion.incorrecta { background: #743e3d; border-color: #ef8b78; }
 .opcion:disabled { cursor: default; }
@@ -106,4 +149,6 @@ h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.15; margin: 12px 0 24
     .datos-juego { gap: 22px; }
     .cabecera-juego { align-items: flex-start; gap: 14px; }
     .marcador { white-space: nowrap; }
+    .pregunta-card { grid-template-columns: 42px 1fr; gap: 12px; padding: 16px; }
+    .numero-card { width: 42px; height: 42px; font-size: 1.4rem; }
 }
